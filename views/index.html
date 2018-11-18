@@ -1,12 +1,342 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DELI-VERY</title>
+	<title>Delivery</title>
+
+	<script src="/socket.io/socket.io.js" defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- <link rel="stylesheet" href="css/deli-very.css"> -->
+	<script type="text/javascript" src="js/menu.js" defer></script>
+	 <script src="js/vue_script.js" defer></script>
+	 <script src="/vue/vue.js" defer></script>
+	 <!-- <script src="js/deli-very.js" defer></script> -->
+
+
 </head>
+
+<header id="header">
+
+</header>
+<h1 text id="headertext">Welcome to CuteBurgersOnline </h1>
 <body>
-	<h1>
-		Hello world!
-	</h1>
-	<a href="/map">View map</a>
+	<main>
+<section id="para1">
+<section id="selectsize">
+
+
+	<h1>  THE WORLD'S CUTEST BURGERS </h1>
+</section>
+
+
+
+	<script src="https://vuejs.org/js/vue.js"></script>
+
+<div id="vue-container">
+  <h1>{{losburger}}</h1>
+
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-evenly;">
+
+    <div v-for="val in item" style="width:100px;">
+
+			<h1>
+      {{ val.name }}
+		</h1>
+
+			<div> <img :src="val.image"  width= 100px> </div>
+
+			<ul>
+
+       <li>
+      {{ val.calories }}
+		</li>
+		<br></br>
+
+      <li v-if="val.gluten">
+    	Contains: <section class="ingredientsname">gluten</section>
+
+		</li>
+		<br></br>
+
+         <li v-if="val.lactose" >
+				 Contains: <section class="ingredientsname">lactose</section>
+
+      </li>
+			<br></br>
+
+			<H5> Hungry for this one? </h5>
+
+			 <input type="checkbox" v-bind:value="val.name" v-model="checkedNames" > Yes!
+
+		</ul>
+
+
+
+    </div>
+
+    </div>
+
+
+
+				<section id="para2">
+						<p id="unique2">
+
+								<h3> Costumer information </h3>
+						<p>  Information about where to deliver your food! </p>
+
+						<section id="contact">
+							<form>
+
+								<p>
+									<label for= "fullname">Full name </label><br>
+									<input type= "text" id= "fullname" name="fn" required="required" placeholder="First- and Last name" v-model="custInfo[0]">
+
+								</p>
+
+				<p>
+					<label for= "Email">E- mail </label><br>
+					<input type= "text" id= "Email" name="fn" required="required" placeholder="E-mail adress" v-model="custInfo[1]">
+
+				</p>
+
+
+
+
+						    <label for="recipient">Payment options</label><br>
+						    <select id="recipient" name="rcp" v-model=custInfo[2]>
+
+						        <option></option>
+						        <option selected>  Credit card </option>
+						        <option >Cash</option>
+						        <option>Invoice</option>
+						        <option>Gift card</option>
+
+
+						    </select>
+
+
+						 <div > Please specify Gender </div>
+
+						        <div>
+
+						            <input type="radio" id="female"
+						                   name="Gender" value="Female" checked v-model="custInfo[3]" />
+						            <label for="female">Female</label>
+						        </div>
+
+						        <div>
+						            <input type="radio" id="male"
+						                   name="Gender" value="Male" v-model="custInfo[3]" />
+						            <label for="male">Male</label>
+						        </div>
+
+						        <div>
+						            <input type="radio" id="No Gender"
+						                   name="Gender" value="Do not wish to provide " v-model="custInfo[3]"/>
+						            <label for="No Gender">Do not wish to provide</label>
+						        </div>
+
+						 </p>
+
+
+						 <h1> Click in the map to set delivery point! </h1>
+
+						 <div class="view-box">
+							 <div id="dots" v-on:click="displayOrder" >
+					         <div   v-bind:style="{ left: order.x + 'px', top: order.y + 'px'}" >
+
+											T
+
+					         </div>
+					     </div>
+						 </div>
+
+
+
+
+				 <button v-on:click=
+
+				 "say('sent'); addOrder(); isHidden=false" type="button" id="sendbutton" >
+								 <img src="https://media.giphy.com/media/6bd9mjPhMxKpQ7Cn7Q/giphy.gif" width= 30px>
+								 Send delivery
+							 </button>
+
+							 <h2> Order confirmation </h2>
+
+								<h4> ORDER SUMMARY </h4>
+
+								<div v-for="val in checkedNames" >
+							 	<p v-if="!isHidden">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/GJL-fft-herz.svg/224px-GJL-fft-herz.svg.png" width="20px">
+									{{val}}
+								</p>
+								</div>
+
+								<h4> CUSTOMER INFORMATION </h4>
+
+									<!-- <div v-for="val in custInfo"> -->
+ 								 	<p v-if="!isHidden">
+										<dl v-if="!isHidden">
+
+												<li> Name : {{custInfo[0]}} </li>
+												<li> Email: {{custInfo[1]}} </li>
+												<li> Payment: {{custInfo[2]}}</li>
+											<li>	Gender: {{custInfo[3]}} </li>
+
+										</dl>
+
+
+
+									</p>
+ 							 		<!-- </div> -->
+
+				</div>
+
+
+			</form>
+		</section>
+	</main>
+</section>
+</p>
+
 </body>
+
+<footer> © 2018 Cute Burgers Inc.
+</footer>
 </html>
+
+
+<!-- comment>
+	<div class= "allburgers">
+
+
+
+				<div class= "burger a"  >
+					<h2> CUTE BURGER </h2>
+				<IMG SRC="https://media.giphy.com/media/l1HwxRQbVSfJAyCFqF/giphy.gif "width= 200 vspace=88
+
+					<p> </p>
+
+					<h3> ingredients </h3>
+					<d1>
+
+
+						<dt> beaf meat </dd>
+							<dd> directly from a nearby swedish farm! </dd>
+
+							<dt> tomatoes </dt>
+							<dt> cute burger sauce </dt>
+							<section class="ingredientsname">
+								<dd> love, eggs and banana </dd>
+								</section>
+						 <dt> sallad </dt>
+						 <dt> melted cheeeeess </dt>
+						 <section class="ingredientsname">
+						 <dd> lactose </dd>
+						 </section>
+						 </div>
+
+				<div class= "burger b" >
+					<h2> CUTE BIGGER BURGER </h2>
+						<IMG SRC="https://media.giphy.com/media/8cMMs8bE4aWej1usaC/giphy.gif "width= 200 vspace=88
+
+							<p> </p>
+
+							<h3> ingredients </h3>
+							<d1>
+
+
+								<dt> beaf meat </dd>
+									<dd> directly from a nearby swedish farm! </dd>
+
+									<dt> tomatoes </dt>
+									<dt> cute burger sauce </dt>
+									<section class="ingredientsname">
+										<dd> love, eggs and banana </dd>
+										</section>
+								 <dt> sallad </dt>
+								 <dt> melted cheeeeess </dt>
+								 <section class="ingredientsname">
+								 <dd> lactose </dd>
+								 </section>
+					</div>
+
+				<div class= "burger c" >
+					<h2> CUTE ENORMOUS BURGER </h2>
+
+					<td> <IMG SRC= "https://media.giphy.com/media/4EEHyzeRi5yBPB4JTe/giphy.gif" width= 200
+ 					 </table>
+
+ 					 <h3> ingredients </h3>
+ 		 			<d1>
+
+ 		 				<dt> beaf meat </dd>
+ 		 					<dd> directly from a nearby swedish farm! </dd>
+
+ 		 					<dt> tomatoes </dt>
+
+ 		 					<dt> cute burger sauce </dt>
+ 							<section class="ingredientsname">
+ 		 						<dd> love, eggs and banana </dd>
+ 							</section>
+ 		 				 <dt> sallad </dt>
+ 		 				 <dt> melted cheeeeess </dt>
+ 						 <section class="ingredientsname">
+ 						 <dd> lactose </dd>
+ 						 </section>
+
+			</div>
+
+	</div>
+
+
+<section>
+
+<h2> Select a drink </h2>
+
+
+
+	 <table class="center">
+		 <thead >
+			 <tr>
+
+				 <th> Drinks </th>
+				 <th> Type </th>
+				 <th> Price </th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td> Coca cola zero </td>
+				<td> Diet soda </td>
+				<td> 30.00 </td>
+
+			</tr>
+			<tr>
+				<td> Apothic Red </td>
+				<td> Red wine </td>
+				<td> 100.00 </td>
+
+			</tr>
+			<tr>
+				<td> Red bull </td>
+				<td> Energy drink </td>
+				<td> 20.00 </td>
+			</tbody>
+
+
+		 </tr>
+
+		</table>
+
+
+
+
+
+
+</section>
+
+<-->
